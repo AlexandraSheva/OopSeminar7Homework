@@ -1,5 +1,11 @@
 package calculator;
 
+class MyException extends Exception {
+  public MyException(String message) {
+    super(message);
+  }
+}
+
 interface PlusOrMinus {
   /**
    * Складывает дробные числа
@@ -24,7 +30,7 @@ interface Divide {
   /**
    * Делит дробные числа
    */
-  public void divide(double num1, double num2);
+  public void divide(double num1, double num2) throws MyException;
 }
 
 public class CalculatorModel implements PlusOrMinus, Divide, Multiply {
@@ -47,13 +53,13 @@ public class CalculatorModel implements PlusOrMinus, Divide, Multiply {
   }
 
   @Override
-  public void divide(double num1, double num2) {
-    if (num2 != 0) {
+  public void divide(double num1, double num2) throws MyException {
+    try {
       result = num1 / num2;
-    } else {
-      // Обработка деления на ноль
-      throw new IllegalArgumentException("На ноль делить нельзя!");
+    } catch (Exception e) {
+      throw new MyException("На ноль делить нельзя!");
     }
+    
   }
 
   /**

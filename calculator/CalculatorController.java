@@ -22,7 +22,12 @@ public class CalculatorController {
         model.multiply(num1, num2);
         break;
       case "/":
-        model.divide(num1, num2);
+        try {
+          model.divide(num1, num2);
+        } catch (MyException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
         break;
       default:
         System.out.println("Некорректная операция!");
